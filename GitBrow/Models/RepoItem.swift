@@ -8,10 +8,11 @@
 
 import Foundation
 
-struct Item: Codable{
+struct RepoItem:Displayable{
+
     let id, watchersCount, forksCount, openIssuesCount, forks, openIssues: Int
-    let nodeID, name, fullName: String
-    let owner: Owner
+    var nodeID, name, fullName: String
+    let owner: OwnerItem
     let itemDescription, language: String?
     let fork: Bool
 

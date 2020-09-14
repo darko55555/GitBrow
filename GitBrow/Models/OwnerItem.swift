@@ -8,14 +8,18 @@
 
 import Foundation
 
-struct Owner: Codable {
-    let login, nodeID, avatarURL, gravatarID, url, htmlURL, followersURL, followingURL, gistsURL, starredURL,subscriptionsURL, organizationsURL, reposURL, eventsURL, receivedEventsURL, type: String
+struct OwnerItem:Displayable {
+    var name: String
+
+
+    let nodeID, avatarURL, gravatarID, url, htmlURL, followersURL, followingURL, gistsURL, starredURL,subscriptionsURL, organizationsURL, reposURL, eventsURL, receivedEventsURL, type: String
     let bio: String?
     let id: Int
     let siteAdmin: Bool
 
     enum CodingKeys: String, CodingKey {
-        case login, id
+        case name = "login"
+        case id
         case nodeID = "node_id"
         case avatarURL = "avatar_url"
         case gravatarID = "gravatar_id"
