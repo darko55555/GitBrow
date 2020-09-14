@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import UIKit
-import RxSwift
 
 class Networking{
    
@@ -16,7 +14,7 @@ class Networking{
     static var shared = Networking()
     private let userAgent = UUID().uuidString
     
-    func makeUrlRequest<T: Codable>(_ queryURL: URL, resultHandler: @escaping (Result<T, APIError>) -> Void) {
+    func makeUrlRequest<T: GithubResult>(_ queryURL: URL, resultHandler: @escaping (Result<T, APIError>) -> Void) {
         var request = URLRequest(url: queryURL)
         request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
         
