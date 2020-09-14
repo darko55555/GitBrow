@@ -11,7 +11,7 @@ import Kingfisher
 
 class RepoDetailViewController: UIViewController {
 
-    var item:Item!
+    var item:RepoItem!
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var repoTitle: UILabel!
@@ -22,7 +22,7 @@ class RepoDetailViewController: UIViewController {
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var languageLabel: UILabel!
     
-    public init(nibName:String, item:Item){
+    public init(nibName:String, item:RepoItem){
         self.item = item
         super.init(nibName: nibName, bundle: nil)
     }
@@ -36,7 +36,7 @@ class RepoDetailViewController: UIViewController {
         
         title = item.name
         repoTitle.text = item.fullName
-        authorButton.setTitle(item.owner.login, for: .normal)
+        authorButton.setTitle(item.owner.name, for: .normal)
         watchersLabel.text = String(item.watchersCount)
         forksLabel.text = String(item.forksCount)
         issuesLabel.text = String(item.openIssuesCount)

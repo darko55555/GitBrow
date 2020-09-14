@@ -20,7 +20,8 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
-    
+    @IBOutlet weak var segmentedControlSearchType: UISegmentedControl!
+
     var loadingView:AnimationView!
     
     override func viewDidLoad() {
@@ -36,7 +37,7 @@ class MainViewController: UIViewController {
         tableView.separatorStyle = .none
         
         loadSearchbar()
-        initTableview()
+//        initTableview()
         observeLoader()
         
     }
@@ -75,34 +76,34 @@ class MainViewController: UIViewController {
         .disposed(by: disposeBag)
     }
     
-    private func initTableview(){
-        viewModel.results.bind(to: tableView.rx.items(cellIdentifier: "ResultsTableViewCell")) { index, model, cell in
-           
-            let cell = cell as? ResultsTableViewCell
-            cell?.repoName.text = model.name
-            cell?.authorLabel.text = model.owner.login
-            cell?.issuesLabel.text = String(model.openIssuesCount)
-            cell?.watchersLabel.text = String(model.watchersCount)
-            cell?.forksLabel.text = String(model.forksCount)
-          
-            let url = URL(string: model.owner.avatarURL)
-            cell?.profileImageView?.kf.setImage(with: url)
-        }
-        .disposed(by: disposeBag)
-        
-        tableView.rx.modelSelected(Item.self).subscribe(onNext:{[weak self] in
-            HapticFeedbackGenerator.generateHapticFeedbackLight()
-            let repoDetailViewController = RepoDetailViewController(nibName: "RepoDetailViewController", item: $0)
-            self?.navigationController?.pushViewController(repoDetailViewController, animated: true)
-        })
-        .disposed(by: disposeBag)
-        
-        tableView.rx.itemSelected
-        .subscribe(onNext:{ [weak self] in
-            self?.tableView.deselectRow(at: $0, animated: false)
-        })
-        .disposed(by: disposeBag)
-    }
+//    private func initTableview(){
+//        viewModel.results.bind(to: tableView.rx.items(cellIdentifier: "ResultsTableViewCell")) { index, model, cell in
+//
+//            let cell = cell as? ResultsTableViewCell
+//            cell?.repoName.text = model.name
+//            cell?.authorLabel.text = model.owner.login
+//            cell?.issuesLabel.text = String(model.openIssuesCount)
+//            cell?.watchersLabel.text = String(model.watchersCount)
+//            cell?.forksLabel.text = String(model.forksCount)
+//
+//            let url = URL(string: model.owner.avatarURL)
+//            cell?.profileImageView?.kf.setImage(with: url)
+//        }
+//        .disposed(by: disposeBag)
+//
+//        tableView.rx.modelSelected(RepoItem.self).subscribe(onNext:{[weak self] in
+//            HapticFeedbackGenerator.generateHapticFeedbackLight()
+//            let repoDetailViewController = RepoDetailViewController(nibName: "RepoDetailViewController", item: $0)
+//            self?.navigationController?.pushViewController(repoDetailViewController, animated: true)
+//        })
+//        .disposed(by: disposeBag)
+//
+//        tableView.rx.itemSelected
+//        .subscribe(onNext:{ [weak self] in
+//            self?.tableView.deselectRow(at: $0, animated: false)
+//        })
+//        .disposed(by: disposeBag)
+//    }
     
     
     private func observeLoader(){

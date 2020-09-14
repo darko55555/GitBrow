@@ -10,14 +10,14 @@ import UIKit
 
 class AuthorDetailsViewController: UIViewController {
 
-    var item:Item!
+    var item:RepoItem!
     
     @IBOutlet weak var authorAvatarImageView: UIImageView!
     @IBOutlet weak var authorNameLabel: UILabel!
     @IBOutlet weak var visitUsersProfileButton: UIButton!
     @IBOutlet weak var usersBioTextField: UITextView!
     
-    public init(nibName:String, item:Item){
+    public init(nibName:String, item:RepoItem){
         self.item = item
         super.init(nibName: nibName, bundle: nil)
     }
@@ -35,7 +35,7 @@ class AuthorDetailsViewController: UIViewController {
         
         visitUsersProfileButton.addTarget(self, action: #selector(openUserProfileOnWeb), for: .touchUpInside)
         
-        authorNameLabel.text = item.owner.login
+        authorNameLabel.text = item.owner.name
         
         usersBioTextField.text = item.owner.bio ?? "No bio for this user"
     }
